@@ -1,0 +1,11 @@
+.env
+credentials.json
+token.json
+client_secret*.json
+config/recipients.json
+.tmp/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.claude/settings.local.json

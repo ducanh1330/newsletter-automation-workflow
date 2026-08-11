@@ -1,0 +1,11 @@
+{
+  "newsletter_name": "Doz.AI",
+  "accent_color": "#35ABE0",
+  "text_color": "#FFFFFF",
+  "muted_color": "#B3B3B3",
+  "background_color": "#0D0D0D",
+  "wrapper_background": "#000000",
+  "divider_color": "#2A2A2A",
+  "font_stack": "'Geologica', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+  "logo_url": "assets/brand/logo.png"
+}

@@ -1,0 +1,10 @@
+requests
+python-dotenv
+jinja2
+premailer
+google-api-python-client
+google-auth-oauthlib
+google-auth
+matplotlib
+pillow
+pillow-avif-plugin

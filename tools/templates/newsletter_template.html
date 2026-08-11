@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ headline }}</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: {{ brand.wrapper_background }};
+    font-family: {{ brand.font_stack }};
+    color: {{ brand.text_color }};
+  }
+  .wrapper {
+    width: 100%;
+    background-color: {{ brand.wrapper_background }};
+    padding: 24px 0;
+  }
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: {{ brand.background_color }};
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .masthead {
+    padding: 24px 32px;
+    border-bottom: 3px solid {{ brand.accent_color }};
+  }
+  .masthead-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: {{ brand.accent_color }};
+    text-decoration: none;
+  }
+  .headline {
+    padding: 32px 32px 8px 32px;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: {{ brand.text_color }};
+  }
+  .intro {
+    padding: 0 32px 16px 32px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: {{ brand.muted_color }};
+  }
+  .section {
+    padding: 20px 32px;
+    border-top: 1px solid {{ brand.divider_color }};
+  }
+  .section-label {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: {{ brand.accent_color }};
+    margin-right: 8px;
+  }
+  .section-heading {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: {{ brand.text_color }};
+    margin-bottom: 14px;
+  }
+  .section-body {
+    font-size: 16px;
+    line-height: 1.6;
+    color: {{ brand.text_color }};
+  }
+  .stats-row {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 14px;
+  }
+  .stat-cell {
+    text-align: center;
+    padding: 16px 8px;
+    background-color: {{ brand.accent_color }};
+  }
+  .stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: {{ brand.wrapper_background }};
+    display: block;
+  }
+  .stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: {{ brand.wrapper_background }};
+    opacity: 0.75;
+    display: block;
+    margin-top: 4px;
+  }
+  .infographic {
+    padding: 16px 0 0 0;
+    text-align: center;
+  }
+  .infographic img {
+    max-width: 100%;
+    border-radius: 6px;
+  }
+  .infographic-caption {
+    font-size: 13px;
+    color: {{ brand.muted_color }};
+    margin-top: 8px;
+  }
+  .sources {
+    padding: 16px 32px 32px 32px;
+    font-size: 13px;
+    color: {{ brand.muted_color }};
+    border-top: 1px solid {{ brand.divider_color }};
+    margin-top: 16px;
+  }
+  .sources a {
+    color: {{ brand.accent_color }};
+  }
+  .footer {
+    padding: 20px 32px;
+    font-size: 12px;
+    color: {{ brand.muted_color }};
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="container">
+    <div class="masthead">
+      {% if brand.logo_url %}
+        <img src="{{ brand.logo_url }}" alt="{{ brand.newsletter_name }}" height="28" style="vertical-align:middle; margin-right:10px">
+      {% endif %}
+      <span class="masthead-name" style="vertical-align:middle">{{ brand.newsletter_name }}</span>
+    </div>
+
+    <div class="headline">{{ headline }}</div>
+
+    {% if intro %}
+    <div class="intro">{{ intro }}</div>
+    {% endif %}
+
+    {% for section in sections %}
+    <div class="section">
+      <div class="section-heading"><span class="section-label"></span>{{ section.heading }}</div>
+      <div class="section-body">{{ section.body_html | safe }}</div>
+      {% if section.stats %}
+      <table class="stats-row" cellpadding="0" cellspacing="8">
+        <tr>
+          {% for stat in section.stats %}
+          <td class="stat-cell">
+            <span class="stat-value">{{ stat.value }}</span>
+            <span class="stat-label">{{ stat.label }}</span>
+          </td>
+          {% endfor %}
+        </tr>
+      </table>
+      {% endif %}
+      {% if section.infographic %}
+      <div class="infographic">
+        <img src="{{ section.infographic.src }}" alt="{{ section.infographic.alt | default('Infographic') }}">
+        {% if section.infographic.caption %}
+        <div class="infographic-caption">{{ section.infographic.caption }}</div>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    {% if sources %}
+    <div class="sources">
+      <strong>Sources</strong>
+      <ul>
+        {% for source in sources %}
+        <li><a href="{{ source.url }}">{{ source.title | default(source.url) }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <div class="footer">{{ brand.newsletter_name }}</div>
+  </div>
+</div>
+</body>
+</html>
